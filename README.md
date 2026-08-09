@@ -333,27 +333,20 @@ Upload a knee X-ray image to receive the predicted KL grade, confidence score, p
 
 ### 🏠 Streamlit Interface
 
-```markdown
 ![Streamlit Home](streamlit_home.png)
-```
+
 
 ### 📊 Prediction Result
 
-```markdown
 ![Prediction Result](prediction_result.png)
-```
 
 ### 📈 Probability Distribution
 
-```markdown
 ![Probability Distribution](probability_distribution.png)
-```
 
 ### 🔥 Grad-CAM Heatmap
 
-```markdown
 ![Grad-CAM Heatmap](gradcam_heatmap.png)
-```
 
 ---
 
@@ -395,8 +388,7 @@ This project helped develop expertise in:
 
 ## 👤 Submitted by:
 
-
-* V. Madhubala
+V. Madhubala
 
 ---
 
