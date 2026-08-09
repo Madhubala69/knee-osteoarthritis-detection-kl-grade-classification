@@ -8,9 +8,13 @@ The system analyzes knee X-rays and predicts the severity stage of osteoarthriti
 
 ## 📌 Project Overview
 
-Knee Osteoarthritis (OA) is one of the most common degenerative joint diseases, causing pain, stiffness, and reduced mobility in millions of people worldwide. Manual interpretation of knee X-rays can be time-consuming, subjective, and inconsistent, especially when detecting early-stage OA. This project addresses that challenge by developing an automated deep learning–based diagnostic support system capable of classifying OA severity using knee X-ray images.
+Knee Osteoarthritis (OA) is one of the most common degenerative joint diseases, causing pain, stiffness, and reduced mobility in millions of people worldwide. Manual interpretation of knee X-rays can be time-consuming, subjective, and inconsistent, especially when detecting early-stage OA.
 
-### Key Objectives
+This project addresses that challenge by developing an automated deep learning–based diagnostic support system capable of classifying OA severity using knee X-ray images. The system uses Convolutional Neural Networks (CNNs) to learn clinically relevant patterns such as joint space narrowing, osteophyte formation, and bone deformities, enabling accurate KL-grade classification.
+
+---
+
+## 🎯 Key Objectives
 
 * Detect Knee Osteoarthritis from X-ray images
 * Classify OA severity using the KL grading system
@@ -24,35 +28,37 @@ Knee Osteoarthritis (OA) is one of the most common degenerative joint diseases, 
 ## 📂 Project Structure
 
 ```text
-Knee-Osteoarthritis-Detection/
+knee-osteoarthritis-detection-kl-grade-classification/
 │
-├── train/
-├── val/
-├── test/
-├── auto_test/
-├── Knee_OA_Training.ipynb
 ├── app.py
+├── Knee_Osteoarthritis.ipynb
 ├── requirements.txt
-├── model/
-│   └── knee_oa_model.h5
+├── README.md
+├── docs/
+│   ├── Knee_Osteoarthritis_Report.pdf
+│   └── Knee_Osteoarthritis_ppt.pdf
 ├── screenshots/
-│   ├── interface.png
-│   ├── prediction_output.png
+│   ├── streamlit_home.png
+│   ├── prediction_result.png
+│   ├── probability_distribution.png
 │   └── gradcam_heatmap.png
-├── KNEE OSTEOARTHRITIS DETECTION (KL-GRADE I – IV).pdf
-└── README.md
+└── model/
+    └── best_knee_oa_model.h5   (download separately)
 ```
 
 ---
 
 ## 🏥 Problem Statement
 
-Traditional OA diagnosis relies heavily on radiologists and orthopedic specialists who visually inspect knee X-rays and assign a KL grade based on features such as joint space narrowing, osteophyte formation, and bone sclerosis. This process is:
+Traditional OA diagnosis relies heavily on radiologists and orthopedic specialists who visually inspect knee X-rays and assign a KL grade based on features such as joint space narrowing, osteophyte formation, and bone sclerosis.
+
+### Limitations of the Existing System
 
 * Subjective and dependent on expert experience
 * Time-consuming for large patient volumes
 * Difficult for detecting subtle early-stage OA changes
 * Challenging in healthcare environments with limited specialists
+* Increased workload for radiologists and orthopedic professionals
 
 The proposed solution aims to provide an intelligent automated system that improves diagnostic accuracy and reduces analysis time.
 
@@ -78,13 +84,13 @@ The system classifies knee X-rays into the following severity levels:
 
 | KL Grade | Severity |
 | -------- | -------- |
-| KL0      | Normal   |
-| KL1      | Doubtful |
-| KL2      | Mild     |
-| KL3      | Moderate |
-| KL4      | Severe   |
+|   KL0    | Normal   |
+|   KL1    | Doubtful |
+|   KL2    | Mild     |
+|   KL3    | Moderate |
+|   KL4    | Severe   |
 
-These labels are derived from the Kellgren–Lawrence grading system used in the dataset.
+These labels follow the Kellgren–Lawrence grading system used in the dataset.
 
 ---
 
@@ -114,12 +120,12 @@ Final Prediction Output
 
 The preprocessing module performs:
 
-* Image resizing
+* Image resizing (224 × 224)
 * Pixel normalization
 * Noise reduction
 * Contrast enhancement
-* Data augmentation
-* Label mapping and dataset organization
+* Data augmentation (rotation, zoom, flip, shift)
+* Label encoding and dataset organization
 
 These steps improve image quality, reduce overfitting, and help the model learn clinically relevant features effectively.
 
@@ -138,20 +144,36 @@ This ensures fair learning across all osteoarthritis severity classes.
 
 ---
 
+## 📊 Dataset Description
+
+The dataset consists of labeled knee X-ray images categorized according to the Kellgren–Lawrence grading system.
+
+### Dataset Features
+
+* Image Type: Knee X-ray Images
+* Classes: Normal, Doubtful, Mild, Moderate, Severe
+* Data Split: Training, Validation, Testing
+* Preprocessing: Resizing, normalization, augmentation
+
+The dataset provides sufficient variability in knee joint conditions, helping the deep learning model learn meaningful patterns for accurate OA severity classification.
+
+---
+
 ## 🤖 Deep Learning Models Used
 
-The model development module supports architectures such as:
+The notebook supports architectures such as:
 
-* ResNet
-* EfficientNet
+* ResNet50
+* EfficientNetB0
 * Custom CNN architectures
 
-The training pipeline includes:
+### Training Pipeline
 
-* Transfer learning
-* Fine-tuning
+* Transfer learning with ImageNet weights
+* Fine-tuning of deeper layers
 * Hyperparameter optimization
-* Model checkpointing and storage management
+* Early stopping and model checkpointing
+* Best model selection based on validation accuracy
 
 ---
 
@@ -172,12 +194,16 @@ These metrics help assess the effectiveness of KL-grade classification.
 
 ## 🔥 Grad-CAM Explainability
 
-To improve clinical interpretability, the system generates Grad-CAM heatmaps that highlight the regions of the knee X-ray that contributed most to the model’s prediction. This allows medical professionals to visually verify whether the model is focusing on relevant anatomical structures such as:
+To improve clinical interpretability, the system generates Grad-CAM heatmaps that highlight the regions of the knee X-ray that contributed most to the model’s prediction.
+
+### Heatmap Highlights
 
 * Joint space narrowing
 * Osteophyte regions
 * Bone deformities
 * Sclerotic changes
+
+This helps medical professionals verify whether the model is focusing on clinically relevant anatomical structures rather than irrelevant image regions.
 
 ---
 
@@ -193,6 +219,16 @@ The project includes a user-friendly Streamlit interface that enables real-time 
 * 📈 Show probability distribution
 * 🔥 Generate Grad-CAM heatmaps
 * 🌐 Browser-based interactive interface
+
+### Example Output
+
+The application displays:
+
+* Predicted OA Grade: Moderate
+* KL Grade 3: Multiple osteophytes, definite joint space narrowing, with mild sclerosis
+* Model Confidence: 38.71%
+* Probability Distribution: Normal, Doubtful, Mild, Moderate, Severe
+* Grad-CAM Visualization: Highlights the knee regions influencing the prediction
 
 ---
 
@@ -243,37 +279,53 @@ The project includes a user-friendly Streamlit interface that enables real-time 
 
 ---
 
+## 📥 Full Project Download
+
 ## 🚀 How to Run the Project
 
-### 1️⃣ Download the Repository
+### 1️⃣ Clone or Download the Repository
 
-Download the project repository from GitHub.
+Download this repository from GitHub.
 
 ### 2️⃣ Install Required Libraries
 
 ```bash
-pip install tensorflow keras streamlit opencv-python pillow numpy pandas matplotlib seaborn scikit-learn albumentations tf-keras-vis imbalanced-learn
+pip install -r requirements.txt
 ```
 
-### 3️⃣ Run the Training Notebook
+Or install manually:
 
 ```bash
-jupyter notebook Knee_OA_Training.ipynb
+pip install streamlit tensorflow numpy opencv-python pillow matplotlib seaborn scikit-learn albumentations tf-keras-vis imbalanced-learn
 ```
 
-### 4️⃣ Launch the Streamlit Application
+### 3️⃣ Download the Trained Model
+
+The trained model files are too large to be stored directly in this repository.
+
+🔗 Google Drive:
+https://drive.google.com/file/d/1Q1kqwQZDgbyGVe2dFVz7yZkaIfRigjuc/view?usp=drive_link
+
+
+### 4️⃣ Run the Training Notebook (Optional)
+
+```bash
+jupyter notebook Knee_Osteoarthritis.ipynb
+```
+
+### 5️⃣ Launch the Streamlit Application
 
 ```bash
 streamlit run app.py
 ```
 
-### 5️⃣ Open in Browser
+### 6️⃣ Open in Browser
 
 ```text
 http://localhost:8501
 ```
 
-Upload a knee X-ray image to receive the predicted KL grade, confidence score, and Grad-CAM visualization.
+Upload a knee X-ray image to receive the predicted KL grade, confidence score, probability distribution, and Grad-CAM visualization.
 
 ---
 
@@ -282,19 +334,25 @@ Upload a knee X-ray image to receive the predicted KL grade, confidence score, a
 ### 🏠 Streamlit Interface
 
 ```markdown
-![Interface](interface.png)
+![Streamlit Home](streamlit_home.png)
 ```
 
-### 📊 Prediction Output
+### 📊 Prediction Result
 
 ```markdown
-![ComparisonOutput](camparison_output.png)
+![Prediction Result](prediction_result.png)
+```
+
+### 📈 Probability Distribution
+
+```markdown
+![Probability Distribution](probability_distribution.png)
 ```
 
 ### 🔥 Grad-CAM Heatmap
 
 ```markdown
-![Grad-CAM](gradcam_heatmap.png)
+![Grad-CAM Heatmap](gradcam_heatmap.png)
 ```
 
 ---
@@ -315,7 +373,7 @@ The project includes multiple testing strategies:
 * Functional Testing – Verifies prediction workflow
 * Usability Testing – Ensures easy interaction with the Streamlit app
 * Performance Testing – Measures image processing and prediction efficiency
-* Compatibility Testing – Validates operation across browsers and systems
+* Compatibility Testing – Validates operation across browsers and operating systems
 * Regression Testing – Ensures updates do not break existing functionality
 
 ---
@@ -335,9 +393,10 @@ This project helped develop expertise in:
 
 ---
 
-## 🎓 Submitted by:
+## 👤 Submitted by:
 
-V. Madhubala
+
+* V. Madhubala
 
 ---
 
@@ -345,11 +404,12 @@ V. Madhubala
 
 This repository contains:
 
-* 📘 Project Report / PDF – Complete project documentation
-* 📊 Presentation Slides – Final review presentation
-* 💻 Training Notebook – Deep learning implementation
-* 🌐 Streamlit Application – Real-time prediction interface
+* 📘 Knee_Osteoarthritis_Report.pdf – Complete project report
+* 📊 Knee_Osteoarthritis_ppt.pdf – Final review presentation
+* 💻 Knee_Osteoarthritis.ipynb – Model training and evaluation notebook
+* 🌐 app.py – Streamlit deployment application
 * 🖼️ Screenshots & Outputs – Interface and prediction examples
+* 📃 Knee_Osteoarthritis_Detection.pdf - Full Interface Output
 
 ---
 
@@ -368,6 +428,8 @@ This repository contains:
 
 ## 🌟 Final Note
 
-This project demonstrates how **Deep Learning, Medical Image Processing, Explainable AI, and Streamlit-based deployment** can be combined into a practical **clinical decision-support system** for **automated Knee Osteoarthritis detection and KL-grade classification**. By providing **fast, reliable, and interpretable predictions**, the system has the potential to assist healthcare professionals in **early diagnosis, severity assessment, and improved patient care**.
+This project demonstrates how Deep Learning, Medical Image Processing, Explainable AI, and Streamlit-based deployment can be combined into a practical clinical decision-support system for automated Knee Osteoarthritis detection and KL-grade classification.
+
+By providing fast, reliable, and interpretable predictions, the system has the potential to assist healthcare professionals in early diagnosis, severity assessment, and improved patient care.
 
 ---
