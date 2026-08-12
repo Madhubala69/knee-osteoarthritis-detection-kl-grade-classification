@@ -409,6 +409,7 @@ This repository contains:
 
 * LinkedIn: https://www.linkedin.com/in/v-madhubala-764747286
 * GitHub: https://github.com/Madhubala69
+* Portfolio: https://madhubala69.github.io/Madhubala.github.io/
 
 ---
 
@@ -423,5 +424,9 @@ This repository contains:
 This project demonstrates how Deep Learning, Medical Image Processing, Explainable AI, and Streamlit-based deployment can be combined into a practical clinical decision-support system for automated Knee Osteoarthritis detection and KL-grade classification.
 
 By providing fast, reliable, and interpretable predictions, the system has the potential to assist healthcare professionals in early diagnosis, severity assessment, and improved patient care.
+
+---
+
+Note: This is a research project. Always consult medical professionals for the accurate diagnosis.
 
 ---
