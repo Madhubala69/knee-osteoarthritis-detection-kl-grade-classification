@@ -1,4 +1,5 @@
-# 🦵 Knee Osteoarthritis Detection using Deep Learning (KL-Grade I–IV)
+# 🦵 Knee Osteoarthritis Detection using Deep Learning 
+#    (KL-Grade I–IV)
 
 A complete Medical Imaging & Deep Learning Project developed using Python, TensorFlow/Keras, CNN architectures, and Streamlit to automatically detect and classify Knee Osteoarthritis (OA) severity from knee X-ray images based on the Kellgren–Lawrence (KL) grading scale.
 
