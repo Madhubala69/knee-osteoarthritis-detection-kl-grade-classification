@@ -427,6 +427,6 @@ By providing fast, reliable, and interpretable predictions, the system has the p
 
 ---
 
-Note: This is a research project. Always consult medical professionals for the accurate diagnosis.
+Note: This is a research project. Always consult a medical professional for accurate diagnosis.
 
 ---
